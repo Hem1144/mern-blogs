@@ -1,11 +1,12 @@
 import express from "express";
 import "dotenv/config";
 import mongoose from "mongoose";
+import env from "./util//validateEnv";
 
 const app = express();
-const port = process.env.PORT;
+const port = env.PORT;
 
-const mongoConnectionString = process.env.MONGO_CONNECTION_STRING;
+const mongoConnectionString = env.MONGO_CONNECTION_STRING;
 if (!mongoConnectionString) {
   throw new Error(
     "MONGO_CONNECTION_STRING environment variable is not defined"
