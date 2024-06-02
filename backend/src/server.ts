@@ -1,19 +1,12 @@
-import "dotenv/config";
-import express from "express";
 import mongoose from "mongoose";
 import env from "./util/validateEnv";
-
-const app = express();
+import app from "./app";
 
 const port = env.PORT;
 const mongoConnectionString = env.MONGO_CONNECTION_STRING;
 
-app.get("/", (req, res) => {
-  res.send("This is get API !");
-});
-
 mongoose
-  .connect(mongoConnectionString as string)
+  .connect(mongoConnectionString)
   .then(() => {
     console.log("Connected to MongoDB");
     app.listen(port, () => {
@@ -24,5 +17,3 @@ mongoose
     console.error("Failed to connect to MongoDB", err);
     process.exit(1);
   });
-
-export default app;
