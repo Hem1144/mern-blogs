@@ -6,12 +6,16 @@ const app = express();
 
 app.get("/", async (req, res, next) => {
   try {
-    // throw Error("Hey");
+    // throw Error("Error occoured");
     const notes = await NoteModel.find().exec();
     res.status(200).json(notes);
   } catch (error) {
     next();
   }
+});
+
+app.use((req, res, next) => {
+  next(Error("Endpoint not found!"));
 });
 
 app.use((error: unknown, req: Request, res: Response, next: NextFunction) => {
