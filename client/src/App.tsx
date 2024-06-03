@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import { Button } from "react-bootstrap";
-import { Note } from "./models/note";
+import { Note as NoteModel } from "./models/note";
 import axios from "axios";
+import Note from "./components/Note";
 
 function App() {
-  const [notes, setNotes] = useState<Note[]>([]);
+  const [notes, setNotes] = useState<NoteModel[]>([]);
 
   useEffect(() => {
     async function loadNotes() {
@@ -25,7 +26,13 @@ function App() {
     }
     loadNotes();
   }, []);
-  return <div className="App">{JSON.stringify(notes)}</div>;
+  return (
+    <div className="App">
+      {notes.map((note) => (
+        <Note note={note} key={note._id} />
+      ))}
+    </div>
+  );
 }
 
 export default App;
