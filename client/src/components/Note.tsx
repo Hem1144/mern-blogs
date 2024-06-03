@@ -6,10 +6,13 @@ interface NotesProps {
 }
 
 const Note = ({ note }: NotesProps) => {
+  const { title, text, createdAt, updatedAt } = note;
+
   return (
     <Card>
       <Card.Body>
-        <Card.Title>{note.title}</Card.Title>
+        <Card.Title>{title}</Card.Title>
+        <Card.Text>{text}</Card.Text>
       </Card.Body>
     </Card>
   );
