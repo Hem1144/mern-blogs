@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
-import { Button } from "react-bootstrap";
+import styles from "./styles/NotesPage.module.css";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { Note as NoteModel } from "./models/note";
 import axios from "axios";
 import Note from "./components/Note";
@@ -27,11 +27,15 @@ function App() {
     loadNotes();
   }, []);
   return (
-    <div className="App">
-      {notes.map((note) => (
-        <Note note={note} key={note._id} />
-      ))}
-    </div>
+    <Container>
+      <Row xs={1} md={2} lg={3} className="g-4">
+        {notes.map((note) => (
+          <Col key={note._id}>
+            <Note note={note} className={styles.note} />
+          </Col>
+        ))}
+      </Row>
+    </Container>
   );
 }
 
