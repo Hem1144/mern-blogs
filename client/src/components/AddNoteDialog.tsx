@@ -1,4 +1,4 @@
-import { Modal } from "react-bootstrap";
+import { Form, Modal } from "react-bootstrap";
 
 interface AddNoteDialogProps {
   onDismiss: () => void;
@@ -10,6 +10,7 @@ const AddNoteDialog = ({ onDismiss }: AddNoteDialogProps) => {
       <Modal.Header closeButton>
         <Modal.Title>Add Note</Modal.Title>
       </Modal.Header>
+      <Form> </Form>
     </Modal>
   );
 };
