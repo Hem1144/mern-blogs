@@ -1,7 +1,9 @@
 import styles from "../styles/Note.module.css";
+import StyleUtils from "../styles/utils.module.css";
 import { Card } from "react-bootstrap";
 import { Note as NoteModel } from "../models/note";
-import app from "../../../backend/src/app";
+// import app from "../ ../../backend/src/app";
+import { MdDelete } from "react-icons/md";
 
 interface NotesProps {
   note: NoteModel;
@@ -14,7 +16,9 @@ const Note = ({ note, className }: NotesProps) => {
   return (
     <Card className={`${styles.noteCard} ${className}`}>
       <Card.Body className={styles.cardBody}>
-        <Card.Title>{title}</Card.Title>
+        <Card.Title className={StyleUtils.flexCenter}>
+          {title} <MdDelete className="text-muted ms-auto" />
+        </Card.Title>
         <Card.Text className={styles.cardText}>{text}</Card.Text>
       </Card.Body>
       <Card.Footer className="text-muted">{createdAt}</Card.Footer>

@@ -4,3 +4,10 @@
   margin-right: auto;
   margin-top: 4px;
 }
+
+.flexCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
