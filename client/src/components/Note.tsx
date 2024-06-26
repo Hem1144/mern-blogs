@@ -2,7 +2,6 @@ import styles from "../styles/Note.module.css";
 import StyleUtils from "../styles/utils.module.css";
 import { Card } from "react-bootstrap";
 import { Note as NoteModel } from "../models/note";
-// import app from "../ ../../backend/src/app";
 import { MdDelete } from "react-icons/md";
 
 interface NotesProps {

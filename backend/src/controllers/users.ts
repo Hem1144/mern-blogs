@@ -42,6 +42,6 @@ export const signUp: RequestHandler<
 
     res.status(201).json(newUser);
   } catch (error) {
-    next(error); // Ensure the error is passed to the next middleware
+    next(error); 
   }
 };
