@@ -1,9 +1,9 @@
 import { InferSchemaType, model, Schema } from "mongoose";
 
 const userSchema = new Schema({
-  username: { type: String, unique: true },
+  username: { type: String, unique: true, required: true },
   email: { type: String, required: true, select: false, unique: true },
-  password: { type: String, required: true, unique: true, select: false },
+  password: { type: String, required: true, select: false },
 });
 
 type User = InferSchemaType<typeof userSchema>;

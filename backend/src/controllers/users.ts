@@ -4,7 +4,7 @@ import UserModel from "../models/user";
 import bcrypt from "bcrypt";
 
 interface SignUpBody {
-  usename?: string;
+  username?: string;
   email: string;
   password: string;
 }
@@ -15,39 +15,33 @@ export const signUp: RequestHandler<
   SignUpBody,
   unknown
 > = async (req, res, next) => {
-  const username = req.body.usename;
-  const email = req.body.email;
-  const passwordRaw = req.body.password;
+  const { username, email, password: passwordRaw } = req.body;
 
   try {
     if (!username || !email || !passwordRaw) {
-      throw createHttpError(400, "Parameters messing");
+      throw createHttpError(400, "Parameters missing");
     }
 
-    const existUsername = await UserModel.findOne({
-      username: username,
-    }).exec();
-
-    if (existUsername) {
-      throw createHttpError(409, "Username alread exists");
+    const existingUsername = await UserModel.findOne({ username }).exec();
+    if (existingUsername) {
+      throw createHttpError(409, "Username already exists");
     }
 
-    const existEmail = await UserModel.findOne({ email: email }).exec();
-
-    if (existEmail) {
-      throw createHttpError(409, "Email alread exists");
+    const existingEmail = await UserModel.findOne({ email }).exec();
+    if (existingEmail) {
+      throw createHttpError(409, "Email already exists");
     }
 
     const passwordHash = await bcrypt.hash(passwordRaw, 10);
 
     const newUser = await UserModel.create({
-      username: username,
-      email: email,
+      username,
+      email,
       password: passwordHash,
     });
 
-    res.send(201).json(newUser);
+    res.status(201).json(newUser);
   } catch (error) {
-    next();
+    next(error); // Ensure the error is passed to the next middleware
   }
 };
